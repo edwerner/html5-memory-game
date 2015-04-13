@@ -27,6 +27,7 @@ var CardGrid = function() {
 			CardObject.canvas = document.getElementById("canvas");
 			CardObject.context = canvas.getContext("2d");
 			CardObject.context.fillStyle = "#FFF";
+			CardObject.context.strokeStyle="#888";
 			CardObject.canvas.addEventListener("mousedown", function(event) {
 				CardObject.imageClicked(event);
 			}, false);
@@ -107,15 +108,18 @@ var CardGrid = function() {
 			// 			CardObject.drawCardGrid(cardsArray);
 			// 		}
 				} else {
-					for (var i = 0; i < cardsArray.length; i++) {
-						cardsArray[i].hidden = true;
-						cardsArray[i].clickedId = undefined;
-					}
 
-					clickedCardsArray.length = 0;
-					CardObject.drawCardGrid(cardsArray);
-					CardObject.messageString = "Didn't find a match";
-					
+					window.setTimeout(function(){
+						for (var i = 0; i < cardsArray.length; i++) {
+							cardsArray[i].hidden = true;
+							cardsArray[i].clickedId = undefined;
+						}
+
+						clickedCardsArray.length = 0;
+						CardObject.drawCardGrid(cardsArray);
+						CardObject.messageString = "Didn't find a match";
+					}, 1000);
+							
 				}
 			}
 			console.log(clickedCardsArray.length);

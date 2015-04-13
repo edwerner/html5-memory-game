@@ -1,11 +1,11 @@
 #content {
 	width: 400px;
-	text-align: center;
 }
 #message-content {
-
+	text-align: center;
 }
 
 #score-content {
-	font-style: bold;
+	font-weight: bold;
+	text-align: center;
 }
