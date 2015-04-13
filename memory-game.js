@@ -27,7 +27,7 @@ var CardGrid = function() {
 			CardObject.canvas = document.getElementById("canvas");
 			CardObject.context = canvas.getContext("2d");
 			CardObject.context.fillStyle = "#FFF";
-			CardObject.context.strokeStyle="#888";
+			CardObject.context.strokeStyle = "#888";
 			CardObject.canvas.addEventListener("mousedown", function(event) {
 				CardObject.imageClicked(event);
 			}, false);
@@ -77,16 +77,19 @@ var CardGrid = function() {
 					&& event.pageX <= cardsArray[i].xPos + 100
 					&& event.pageY >= cardsArray[i].yPos
 					&& event.pageY <= cardsArray[i].yPos + 100) {
-					cardsArray[i].clickedId = i;
-					cardsArray[i].hidden = false;
-
 					if (clickedCardsArray.length == 0) {
+						cardsArray[i].clickedId = i;
+						cardsArray[i].hidden = false;
 						clickedCardsArray.push(cardsArray[i]);
 					} else if (clickedCardsArray.length ==  1
 						&& clickedCardsArray[0].clickedId 
 						!= cardsArray[i].clickedId) {
+						cardsArray[i].clickedId = i;
+						cardsArray[i].hidden = false;
 						clickedCardsArray.push(cardsArray[i]);
 					}
+
+					console.log("clickedCardsArray.length: " + clickedCardsArray.length);
 					// else if (clickedCardsArray.length ==  2
 					// 	&& clickedCardsArray[0].clickedId 
 					// 	!= clickedCardsArray[1].clickedId) { {
