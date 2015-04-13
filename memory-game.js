@@ -18,6 +18,8 @@ var CardGrid = function() {
 		canvas: undefined,
 		context: undefined,
 		html5Image: undefined,
+		messageString: "Welcome to Memory Game",
+		score: 0,
 		getRandomNumber: function() {
     		return Math.floor(Math.random() * (this.cardsLength - 1 + 1)) + 1;
 		},
@@ -93,10 +95,10 @@ var CardGrid = function() {
 				}
 			}
 
-			var message = "";
 			if (clickedCardsArray.length == 2) {
 				if (clickedCardsArray[0].name == clickedCardsArray[1].name) {
-					message = "found a match";
+					CardObject.messageString = "Found a match";
+					CardObject.score += 100;
 
 			// 		for (var i = 0; i < cardsArray.length; i++) {
 			// 			cardsArray.length = 0;
@@ -112,12 +114,13 @@ var CardGrid = function() {
 
 					clickedCardsArray.length = 0;
 					CardObject.drawCardGrid(cardsArray);
-					message = "didn't find a match";
+					CardObject.messageString = "Didn't find a match";
 					
 				}
 			}
 			console.log(clickedCardsArray.length);
-			document.getElementById("update-text").innerHTML = message;
+			document.getElementById("update-text").innerHTML = CardObject.messageString;
+			document.getElementById("score").innerHTML = CardObject.score;
 			CardObject.drawCardGrid(cardsArray);
 		},
 		drawCardGrid: function(cardsArray) {
