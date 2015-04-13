@@ -101,7 +101,7 @@ var CardGrid = function() {
 
 			if (clickedCardsArray.length == 2) {
 				if (clickedCardsArray[0].name == clickedCardsArray[1].name) {
-					CardObject.messageString = "Found a match";
+					CardObject.messageString = "Found a match!";
 					CardObject.score += 100;
 
 			// 		for (var i = 0; i < cardsArray.length; i++) {
@@ -120,14 +120,13 @@ var CardGrid = function() {
 
 						clickedCardsArray.length = 0;
 						CardObject.drawCardGrid(cardsArray);
-						CardObject.messageString = "Didn't find a match";
 					}, 1000);
-							
+					CardObject.messageString = "Didn't find a match";
 				}
 			}
 			console.log(clickedCardsArray.length);
-			document.getElementById("update-text").innerHTML = CardObject.messageString;
-			document.getElementById("score").innerHTML = CardObject.score;
+			CardObject.updateMessageText("message-text", CardObject.messageString);
+			CardObject.updateMessageText("score", CardObject.score);
 			CardObject.drawCardGrid(cardsArray);
 		},
 		drawCardGrid: function(cardsArray) {
@@ -145,6 +144,28 @@ var CardGrid = function() {
 				//console.log("card hidden: " + randomCard.hidden);
 			}
 			
+		},
+		bindResetButton: function() {
+			var button = document.getElementById("reset-button");
+			button.onclick = function() {
+				for (var i = 0; i < cardsArray.length; i++) {
+					cardsArray[i].hidden = true;
+					cardsArray[i].clickedId = undefined;
+				}
+
+				clickedCardsArray.length = 0;
+				//CardObject.drawCardGrid(cardsArray);
+
+
+				cardsArray.length = 0;
+				clickedCardsArray.length = 0;
+				CardObject.createCardObjects();
+				CardObject.messageString = "Cards reset.";
+				CardObject.updateMessageText("message-text", CardObject.messageString);
+			}
+		},
+		updateMessageText: function(element, message) {
+			document.getElementById(element).innerHTML = message;
 		},
 		getCardData: [{
 			name: "Empty",
@@ -291,7 +312,8 @@ var CardGrid = function() {
 		initializeCardGrid: CardObject.initializeCardGrid,
 		createCardObjects: CardObject.createCardObjects,
 		drawCardGrid: CardObject.drawCardGrid,
-		getCardData: CardObject.getCardData
+		getCardData: CardObject.getCardData,
+		bindResetButton: CardObject.bindResetButton
 	}
 }
 
@@ -307,5 +329,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	clickedCardsArray = [];
 	grid.initializeCardGrid();
 	grid.createCardObjects();
+	grid.bindResetButton();
 });
 //grid.drawCardGrid(cardsArray);
