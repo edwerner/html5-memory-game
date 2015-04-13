@@ -1,5 +1,6 @@
 var Card = function() {
 	var name = undefined;
+	var clickedId = undefined;
 	var image = undefined;
 	var spriteXPos = undefined;
 	var xPos = undefined;
@@ -62,6 +63,7 @@ var CardGrid = function() {
 					card.hidden = true;
 					cardsArray.push(card);
 				}
+				CardObject.drawCardGrid(cardsArray);
 			}
 		},
 		imageClicked: function(event) {
@@ -72,10 +74,50 @@ var CardGrid = function() {
 					&& event.pageX <= cardsArray[i].xPos + 100
 					&& event.pageY >= cardsArray[i].yPos
 					&& event.pageY <= cardsArray[i].yPos + 100) {
+					cardsArray[i].clickedId = i;
 					cardsArray[i].hidden = false;
+
+					if (clickedCardsArray.length == 0) {
+						clickedCardsArray.push(cardsArray[i]);
+					} else if (clickedCardsArray.length ==  1
+						&& clickedCardsArray[0].clickedId 
+						!= cardsArray[i].clickedId) {
+						clickedCardsArray.push(cardsArray[i]);
+					}
+					// else if (clickedCardsArray.length ==  2
+					// 	&& clickedCardsArray[0].clickedId 
+					// 	!= clickedCardsArray[1].clickedId) { {
+					// 		clickedCardsArray.push(cardsArray[i]);
+					// 	}
+					// }
 				}
 			}
 
+			var message = "";
+			if (clickedCardsArray.length == 2) {
+				if (clickedCardsArray[0].name == clickedCardsArray[1].name) {
+					message = "found a match";
+
+			// 		for (var i = 0; i < cardsArray.length; i++) {
+			// 			cardsArray.length = 0;
+			// 			clickedCardsArray.length = 0;
+			// 			grid.createCardObjects();
+			// 			CardObject.drawCardGrid(cardsArray);
+			// 		}
+				} else {
+					for (var i = 0; i < cardsArray.length; i++) {
+						cardsArray[i].hidden = true;
+						cardsArray[i].clickedId = undefined;
+					}
+
+					clickedCardsArray.length = 0;
+					CardObject.drawCardGrid(cardsArray);
+					message = "didn't find a match";
+					
+				}
+			}
+			console.log(clickedCardsArray.length);
+			document.getElementById("update-text").innerHTML = message;
 			CardObject.drawCardGrid(cardsArray);
 		},
 		drawCardGrid: function(cardsArray) {
@@ -90,7 +132,7 @@ var CardGrid = function() {
 					CardObject.context.strokeRect(randomCard.xPos, randomCard.yPos, 100, 100);
 					CardObject.context.fillRect(randomCard.xPos, randomCard.yPos, 100, 100);
 				}
-				console.log("card hidden: " + randomCard.hidden);
+				//console.log("card hidden: " + randomCard.hidden);
 			}
 			
 		},
@@ -244,8 +286,16 @@ var CardGrid = function() {
 }
 
 var grid = new CardGrid();
-var cardsData = grid.getCardData;
+var cardsData;
 var cardsArray = [];
-grid.initializeCardGrid();
-grid.createCardObjects();
-grid.drawCardGrid(cardsArray);
+var clickedCardsArray = [];
+
+document.addEventListener("DOMContentLoaded", function(event) {
+	grid = new CardGrid();
+	cardsData = grid.getCardData;
+	cardsArray = [];
+	clickedCardsArray = [];
+	grid.initializeCardGrid();
+	grid.createCardObjects();
+});
+//grid.drawCardGrid(cardsArray);
