@@ -18,8 +18,9 @@ var CardGrid = function() {
 		canvas: undefined,
 		context: undefined,
 		html5Image: undefined,
-		messageString: "Welcome to Memory Game",
+		messageString: "Welcome!",
 		score: 0,
+		solved: undefined,
 		getRandomNumber: function() {
     		return Math.floor(Math.random() * (this.cardsLength - 1 + 1)) + 1;
 		},
@@ -31,6 +32,7 @@ var CardGrid = function() {
 			CardObject.canvas.addEventListener("mousedown", function(event) {
 				CardObject.imageClicked(event);
 			}, false);
+			solved = false;
 		},
 		createCardObjects: function() {
 			CardObject.html5Image = new Image();
@@ -90,26 +92,16 @@ var CardGrid = function() {
 					}
 
 					console.log("clickedCardsArray.length: " + clickedCardsArray.length);
-					// else if (clickedCardsArray.length ==  2
-					// 	&& clickedCardsArray[0].clickedId 
-					// 	!= clickedCardsArray[1].clickedId) { {
-					// 		clickedCardsArray.push(cardsArray[i]);
-					// 	}
-					// }
 				}
 			}
 
 			if (clickedCardsArray.length == 2) {
 				if (clickedCardsArray[0].name == clickedCardsArray[1].name) {
-					CardObject.messageString = "Found a match!";
-					CardObject.score += 100;
-
-			// 		for (var i = 0; i < cardsArray.length; i++) {
-			// 			cardsArray.length = 0;
-			// 			clickedCardsArray.length = 0;
-			// 			grid.createCardObjects();
-			// 			CardObject.drawCardGrid(cardsArray);
-			// 		}
+					if (solved == false) {
+						CardObject.messageString = "Found a match!";
+						CardObject.score += 100;
+						solved = true;
+					}
 				} else {
 
 					window.setTimeout(function(){
@@ -156,7 +148,7 @@ var CardGrid = function() {
 				clickedCardsArray.length = 0;
 				//CardObject.drawCardGrid(cardsArray);
 
-
+				solved = false;
 				cardsArray.length = 0;
 				clickedCardsArray.length = 0;
 				CardObject.createCardObjects();
@@ -331,4 +323,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	grid.createCardObjects();
 	grid.bindResetButton();
 });
-//grid.drawCardGrid(cardsArray);
