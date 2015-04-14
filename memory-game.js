@@ -27,8 +27,10 @@ var CardGrid = function() {
 		initializeCardGrid: function() {
 			CardObject.canvas = document.getElementById("canvas");
 			CardObject.context = canvas.getContext("2d");
-			CardObject.context.fillStyle = "#FFF";
-			CardObject.context.strokeStyle = "#888";
+			CardObject.context.fillStyle = "#FFFFFF";
+			CardObject.context.strokeStyle = "#888888";
+			CardObject.context.font = "12px Arial";
+      		CardObject.context.textAlign = "center";
 			CardObject.canvas.addEventListener("mousedown", function(event) {
 				CardObject.imageClicked(event);
 			}, false);
@@ -89,9 +91,6 @@ var CardGrid = function() {
 						cardsArray[i].hidden = false;
 						clickedCardsArray.push(cardsArray[i]);
 					}
-
-					console.log("cardsArray[i].id: " + cardsArray[i].id);
-					console.log("clickedCardsArray[0].id: " + clickedCardsArray[0].id);
 				}
 			}
 
@@ -110,29 +109,34 @@ var CardGrid = function() {
 						}
 
 						clickedCardsArray.length = 0;
+						CardObject.context.clearRect(0, 0, CardObject.canvas.width, CardObject.canvas.height);
 						CardObject.drawCardGrid(cardsArray);
 					}, 1000);
-					CardObject.messageString = "Didn't find a match";
+					CardObject.messageString = "Didn't find a match.";
 				}
 			}
-			//console.log(clickedCardsArray.length);
 			CardObject.updateMessageText("message-text", CardObject.messageString);
 			CardObject.updateMessageText("score", CardObject.score);
 			CardObject.drawCardGrid(cardsArray);
 		},
 		drawCardGrid: function(cardsArray) {
-
+			var textPosX;
+			var textPosY;
 			for (var i = 0; i < cardsArray.length; i++) {
 				var randomCard = cardsArray[i];
-
 				CardObject.context.drawImage(CardObject.html5Image, randomCard.spriteXPos, 0, 
 					100, 100, randomCard.xPos, randomCard.yPos, 100, 100);
 
 				if (randomCard.hidden == true) {
 					CardObject.context.strokeRect(randomCard.xPos, randomCard.yPos, 100, 100);
 					CardObject.context.fillRect(randomCard.xPos, randomCard.yPos, 100, 100);
+				} else {
+					textPosX = randomCard.xPos + 50;
+					textPosY = randomCard.yPos + 114;
+					CardObject.context.fillStyle = "#000000";
+					CardObject.context.fillText(randomCard.name, textPosX, textPosY);
+					CardObject.context.fillStyle = "#FFFFFF";
 				}
-				//console.log("card hidden: " + randomCard.hidden);
 			}
 			
 		},
@@ -144,13 +148,12 @@ var CardGrid = function() {
 				}
 
 				clickedCardsArray.length = 0;
-				//CardObject.drawCardGrid(cardsArray);
-
 				solved = false;
 				cardsArray.length = 0;
 				clickedCardsArray.length = 0;
+				CardObject.context.clearRect(0, 0, CardObject.canvas.width, CardObject.canvas.height);
 				CardObject.createCardObjects();
-				CardObject.messageString = "Cards reset.";
+				CardObject.messageString = "Cards shuffled.";
 				CardObject.updateMessageText("message-text", CardObject.messageString);
 			}
 		},
@@ -170,7 +173,7 @@ var CardGrid = function() {
 			name: "Breadboard",
 			xPos: 200
 		},{
-			name: "Breadboard/Jumper Wires",
+			name: "Breadboard/Jumpers",
 			xPos: 300
 		},{
 			name: "Electrolytic Capacitor",
@@ -188,13 +191,13 @@ var CardGrid = function() {
 			name: "5-inch Floppy Drive",
 			xPos: 800
 		},{
-			name: "Hard Disk Drive Headers",
+			name: "Disk Drive Headers",
 			xPos: 900
 		},{
-			name: "Large Jumper Cables",
+			name: "Large Jumpers",
 			xPos: 1000
 		},{
-			name: "Small Jumper Cables",
+			name: "Small Jumpers",
 			xPos: 1100
 		},{
 			name: "Jumper Wire Bundle",
@@ -239,31 +242,31 @@ var CardGrid = function() {
 			name: "Power Supply Unit",
 			xPos: 2500
 		},{
-			name: "Pressure Sensor",
+			name: "Power7Switch",
 			xPos: 2600
 		},{
-			name: "Printer Connector",
+			name: "Pressure Sensor",
 			xPos: 2700
 		},{
-			name: "Protoboard",
+			name: "Printer Connector",
 			xPos: 2800
 		},{
-			name: "PS/2 Ports",
+			name: "Protoboard",
 			xPos: 2900
 		},{
-			name: "PSU Plug",
+			name: "PS/2 Ports",
 			xPos: 3000
 		},{
-			name: "Resistor",
+			name: "PSU Plug",
 			xPos: 3100
 		},{
-			name: "Ribbon Cable",
+			name: "Resistor",
 			xPos: 3200
 		},{
-			name: "Servomotor",
+			name: "Ribbon Cable",
 			xPos: 3300
 		},{
-			name: "Sleep Switch Display",
+			name: "Servomotor",
 			xPos: 3400
 		},{
 			name: "Speaker",
@@ -287,16 +290,15 @@ var CardGrid = function() {
 			name: "Transistor (NPN)",
 			xPos: 4100
 		},{
-			name: "Type A USB Connector",
+			name: "Type A USB",
 			xPos: 4200
 		},{
-			name: "Type B USB Connector",
+			name: "Type B USB",
 			xPos: 4300
 		},{
 			name: "VGA Connector",
 			xPos: 4400
 		}]
-
 	};
 	return {
 		initializeCardGrid: CardObject.initializeCardGrid,

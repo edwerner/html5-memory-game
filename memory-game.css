@@ -1,6 +1,11 @@
+body, html {
+	background: #F8F8F8;
+}
+
 #content {
 	width: 400px;
 }
+
 #message-content {
 	text-align: center;
 }
@@ -15,7 +20,8 @@
 }
 
 #reset-button {
-	width: 90px;
+	width: 88%;
+	height: 100px;
 }
 
 .noselect {
