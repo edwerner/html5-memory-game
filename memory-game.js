@@ -1,6 +1,6 @@
 var Card = function() {
 	var name = undefined;
-	var clickedId = undefined;
+	var id = undefined;
 	var image = undefined;
 	var spriteXPos = undefined;
 	var xPos = undefined;
@@ -18,7 +18,7 @@ var CardGrid = function() {
 		canvas: undefined,
 		context: undefined,
 		html5Image: undefined,
-		messageString: "Welcome!",
+		messageString: "JS-Memory-Game",
 		score: 0,
 		solved: undefined,
 		getRandomNumber: function() {
@@ -62,6 +62,7 @@ var CardGrid = function() {
 					var randomNumber = CardObject.getRandomNumber();
 					var card = new Card();
 					card.name = cardsData[randomNumber].name;
+					card.id = i;
 					card.spriteXPos = cardsData[randomNumber].xPos;
 					card.xPos = this.xPos;
 					card.yPos = this.yPos;
@@ -80,18 +81,17 @@ var CardGrid = function() {
 					&& event.pageY >= cardsArray[i].yPos
 					&& event.pageY <= cardsArray[i].yPos + 100) {
 					if (clickedCardsArray.length == 0) {
-						cardsArray[i].clickedId = i;
 						cardsArray[i].hidden = false;
 						clickedCardsArray.push(cardsArray[i]);
 					} else if (clickedCardsArray.length ==  1
-						&& clickedCardsArray[0].clickedId 
-						!= cardsArray[i].clickedId) {
-						cardsArray[i].clickedId = i;
+						&& clickedCardsArray[0].id
+						!= cardsArray[i].id) {
 						cardsArray[i].hidden = false;
 						clickedCardsArray.push(cardsArray[i]);
 					}
 
-					console.log("clickedCardsArray.length: " + clickedCardsArray.length);
+					console.log("cardsArray[i].id: " + cardsArray[i].id);
+					console.log("clickedCardsArray[0].id: " + clickedCardsArray[0].id);
 				}
 			}
 
@@ -107,7 +107,6 @@ var CardGrid = function() {
 					window.setTimeout(function(){
 						for (var i = 0; i < cardsArray.length; i++) {
 							cardsArray[i].hidden = true;
-							cardsArray[i].clickedId = undefined;
 						}
 
 						clickedCardsArray.length = 0;
@@ -116,7 +115,7 @@ var CardGrid = function() {
 					CardObject.messageString = "Didn't find a match";
 				}
 			}
-			console.log(clickedCardsArray.length);
+			//console.log(clickedCardsArray.length);
 			CardObject.updateMessageText("message-text", CardObject.messageString);
 			CardObject.updateMessageText("score", CardObject.score);
 			CardObject.drawCardGrid(cardsArray);
@@ -142,7 +141,6 @@ var CardGrid = function() {
 			button.onclick = function() {
 				for (var i = 0; i < cardsArray.length; i++) {
 					cardsArray[i].hidden = true;
-					cardsArray[i].clickedId = undefined;
 				}
 
 				clickedCardsArray.length = 0;
