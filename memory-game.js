@@ -18,7 +18,7 @@ var CardGrid = function() {
 		canvas: undefined,
 		context: undefined,
 		html5Image: undefined,
-		messageString: "JS-Memory-Game",
+		messageString: "Press a square",
 		score: 0,
 		solved: undefined,
 		cardsActive: undefined,
@@ -130,12 +130,12 @@ var CardGrid = function() {
 				var randomCard = cardsArray[i];
 					textPosX = randomCard.xPos + 50;
 					textPosY = randomCard.yPos + 58;
-					CardObject.context.font = "50px Arial";
+					CardObject.context.font = "55px Arial";
 					CardObject.context.fillStyle = "#000000";
 					CardObject.context.fillText(randomCard.index, textPosX, textPosY);
 					textPosX = randomCard.xPos + 50;
 					textPosY = randomCard.yPos + 80;
-					CardObject.context.font = "12px Arial";
+					CardObject.context.font = "14px Arial";
 					CardObject.context.fillText(randomCard.name, textPosX, textPosY);
 					CardObject.context.fillStyle = "#FFFFFF";
 

@@ -19,9 +19,9 @@ body, html {
 	display: inline;
 }
 
-#reset-button {
+#shuffle-button {
 	width: 88%;
-	height: 100px;
+	height: 80px;
 }
 
 .noselect {
@@ -31,4 +31,9 @@ body, html {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+#social-buttons-content {
+	width: 220px;
+	margin: 25px 0px 0px 112px;
 }

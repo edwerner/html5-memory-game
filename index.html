@@ -12,15 +12,34 @@
 	        		<canvas id="canvas" width="400" height="400" />
 	        	</div>
 	        	<div id="message-content">
-					<h1 id="message-text" class="noselect">JS-Memory-Game</h1>
+					<h1 id="message-text" class="noselect">Press a square</h1>
 	        	</div>
 	        	<div id="score-content">
 					<h3 id="score-text" class="noselect">Current Score: <div id="score">0</div></h3>
 	        		<div id="button-content">
-	        			<button id="reset-button" class="noselect btn btn-primary">Shuffle Cards</div>
+	        			<button id="shuffle-button" class="noselect btn btn-primary">Shuffle Cards</div>
 	        		</div>
 	        	</div>
+	        	<div id="social-buttons-content">
+	        		<!-- google plus share button -->
+		            <script src="memory-game.js"></script>
+					<script src="https://apis.google.com/js/platform.js" async defer></script>
+					<div class="g-plus" data-action="share" data-height="24"></div>
+	        		<!-- twitter share button -->
+		            <a class="twitter-share-button"
+					  href="https://twitter.com/share"
+					  data-url="http://js-memory-game.appspot.com"
+					  data-via="@edwerner">
+					Tweet
+					</a>
+					<script>
+					window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+					</script>
+	        		<!-- google plus share button -->
+		            <script src="memory-game.js"></script>
+					<script src="https://apis.google.com/js/platform.js" async defer></script>
+					<div class="g-plus" data-action="share" data-height="24"></div>
+	        	</div>
         	</div>
-            <script src="memory-game.js"></script>
         </body>
 </html>
