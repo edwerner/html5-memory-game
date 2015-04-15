@@ -6,7 +6,8 @@ var Card = function() {
 	var xPos = undefined;
 	var yPos = undefined;
 	var hidden = true;
-}
+	var selected = false
+};
 
 var CardGrid = function() {
 
@@ -97,7 +98,7 @@ var CardGrid = function() {
 			if (clickedCardsArray.length == 2) {
 				if (clickedCardsArray[0].name == clickedCardsArray[1].name) {
 					if (solved == false) {
-						CardObject.messageString = "Found a match!";
+						CardObject.messageString = "Found a match";
 						CardObject.score += 100;
 						solved = true;
 					}
@@ -112,7 +113,7 @@ var CardGrid = function() {
 						CardObject.context.clearRect(0, 0, CardObject.canvas.width, CardObject.canvas.height);
 						CardObject.drawCardGrid(cardsArray);
 					}, 1000);
-					CardObject.messageString = "Didn't find a match.";
+					CardObject.messageString = "Didn't find a match";
 				}
 			}
 			CardObject.updateMessageText("message-text", CardObject.messageString);
@@ -153,7 +154,7 @@ var CardGrid = function() {
 				clickedCardsArray.length = 0;
 				CardObject.context.clearRect(0, 0, CardObject.canvas.width, CardObject.canvas.height);
 				CardObject.createCardObjects();
-				CardObject.messageString = "Cards shuffled.";
+				CardObject.messageString = "Cards shuffled";
 				CardObject.updateMessageText("message-text", CardObject.messageString);
 			}
 		},
@@ -170,10 +171,10 @@ var CardGrid = function() {
 			name: "Audio Ports",
 			xPos: 100
 		},{
-			name: "Breadboard",
+			name: "Breadboard/Jumpers",
 			xPos: 200
 		},{
-			name: "Breadboard/Jumpers",
+			name: "Breadboard",
 			xPos: 300
 		},{
 			name: "Electrolytic Capacitor",
@@ -188,19 +189,19 @@ var CardGrid = function() {
 			name: "Ethernet Cable",
 			xPos: 700
 		},{
-			name: "5-inch Floppy Drive",
+			name: "5\" Floppy Drive",
 			xPos: 800
 		},{
 			name: "Disk Drive Headers",
 			xPos: 900
 		},{
-			name: "Large Jumpers",
+			name: "Large Jumper Wire",
 			xPos: 1000
 		},{
-			name: "Small Jumpers",
+			name: "Small Jumper Wire",
 			xPos: 1100
 		},{
-			name: "Jumper Wire Bundle",
+			name: "Jumper Wires",
 			xPos: 1200
 		},{
 			name: "Green LED",
@@ -212,7 +213,7 @@ var CardGrid = function() {
 			name: "Tricolor LED",
 			xPos: 1500
 		},{
-			name: "RAM Memory Stick",
+			name: "RAM",
 			xPos: 1600
 		},{
 			name: "Mini USB",
@@ -236,13 +237,13 @@ var CardGrid = function() {
 			name: "Piezo Buzzer",
 			xPos: 2300
 		},{
-			name: "Rotary Potentiometer",
+			name: "Potentiometer",
 			xPos: 2400
 		},{
 			name: "Power Supply Unit",
 			xPos: 2500
 		},{
-			name: "Power7Switch",
+			name: "Power Switch",
 			xPos: 2600
 		},{
 			name: "Pressure Sensor",
@@ -272,10 +273,10 @@ var CardGrid = function() {
 			name: "Speaker",
 			xPos: 3500
 		},{
-			name: "Switch (DPDT)",
+			name: "DPDT Switch",
 			xPos: 3600
 		},{
-			name: "Switch (SPST)",
+			name: "SPST Switch",
 			xPos: 3700
 		},{
 			name: "Thermistor",
@@ -287,7 +288,7 @@ var CardGrid = function() {
 			name: "Transformer",
 			xPos: 4000
 		},{
-			name: "Transistor (NPN)",
+			name: "NPN Transistor",
 			xPos: 4100
 		},{
 			name: "Type A USB",
