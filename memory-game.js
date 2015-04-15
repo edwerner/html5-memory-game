@@ -1,8 +1,9 @@
 var Card = function() {
+	var index = undefined;
 	var name = undefined;
 	var id = undefined;
 	var image = undefined;
-	var spriteXPos = undefined;
+	//var spriteXPos = undefined;
 	var xPos = undefined;
 	var yPos = undefined;
 	var hidden = true;
@@ -30,7 +31,6 @@ var CardGrid = function() {
 			CardObject.context = canvas.getContext("2d");
 			CardObject.context.fillStyle = "#FFFFFF";
 			CardObject.context.strokeStyle = "#888888";
-			CardObject.context.font = "12px Arial";
       		CardObject.context.textAlign = "center";
 			CardObject.canvas.addEventListener("mousedown", function(event) {
 				CardObject.imageClicked(event);
@@ -65,9 +65,10 @@ var CardGrid = function() {
 					}
 					var randomNumber = CardObject.getRandomNumber();
 					var card = new Card();
+					card.index = cardsData[randomNumber].index;
 					card.name = cardsData[randomNumber].name;
-					card.id = i;
-					card.spriteXPos = cardsData[randomNumber].xPos;
+					card.id = "card_id_" + i;
+					//card.spriteXPos = cardsData[randomNumber].xPos;
 					card.xPos = this.xPos;
 					card.yPos = this.yPos;
 					card.hidden = true;
@@ -129,18 +130,22 @@ var CardGrid = function() {
 			var textPosY;
 			for (var i = 0; i < cardsArray.length; i++) {
 				var randomCard = cardsArray[i];
-				CardObject.context.drawImage(CardObject.html5Image, randomCard.spriteXPos, 0, 
-					100, 100, randomCard.xPos, randomCard.yPos, 100, 100);
+				//CardObject.context.drawImage(CardObject.html5Image, randomCard.spriteXPos, 0, 
+				//	100, 100, randomCard.xPos, randomCard.yPos, 100, 100);
+					textPosX = randomCard.xPos + 50;
+					textPosY = randomCard.yPos + 60;
+					CardObject.context.font = "50px Arial";
+					CardObject.context.fillStyle = "#000000";
+					CardObject.context.fillText(randomCard.index, textPosX, textPosY);
+					textPosX = randomCard.xPos + 50;
+					textPosY = randomCard.yPos + 80;
+					CardObject.context.font = "12px Arial";
+					CardObject.context.fillText(randomCard.name, textPosX, textPosY);
+					CardObject.context.fillStyle = "#FFFFFF";
 
 				if (randomCard.hidden == true) {
 					CardObject.context.strokeRect(randomCard.xPos, randomCard.yPos, 100, 100);
 					CardObject.context.fillRect(randomCard.xPos, randomCard.yPos, 100, 100);
-				} else {
-					textPosX = randomCard.xPos + 50;
-					textPosY = randomCard.yPos + 114;
-					CardObject.context.fillStyle = "#000000";
-					CardObject.context.fillText(randomCard.name, textPosX, textPosY);
-					CardObject.context.fillStyle = "#FFFFFF";
 				}
 			}
 			
@@ -166,144 +171,162 @@ var CardGrid = function() {
 			document.getElementById(element).innerHTML = message;
 		},
 		getCardData: [{
-			name: "Empty",
-			xPos: 0
+			index: "NULL",
+			name: "NULL"
 		},{
-			name: "Battery",
-			xPos: 0
+			index: 0,
+			name: "Zero"
 		},{
-			name: "Audio Ports",
-			xPos: 100
+			index: 1,
+			name: "One"
 		},{
-			name: "Breadboard/Jumpers",
-			xPos: 200
+			index: 2,
+			name: "Two"
 		},{
-			name: "Breadboard",
-			xPos: 300
+			index: 3,
+			name: "Three"
 		},{
-			name: "Electrolytic Capacitor",
-			xPos: 400
+			index: 4,
+			name: "Four"
 		},{
-			name: "Ceramic Capacitor",
-			xPos: 500
+			index: 5,
+			name: "Five"
 		},{
-			name: "Diode",
-			xPos: 600
+			index: 6,
+			name: "Six"
 		},{
-			name: "Ethernet Cable",
-			xPos: 700
+			index: 7,
+			name: "Seven"
 		},{
-			name: "5\" Floppy Drive",
-			xPos: 800
+			index: 8,
+			name: "Eight"
 		},{
-			name: "Disk Drive Headers",
-			xPos: 900
+			index: 9,
+			name: "Nine"
 		},{
-			name: "Large Jumper Wire",
-			xPos: 1000
+			index: 10,
+			name: "Ten"
 		},{
-			name: "Small Jumper Wire",
-			xPos: 1100
+			index: 11,
+			name: "Eleven"
 		},{
-			name: "Jumper Wires",
-			xPos: 1200
+			index: 12,
+			name: "Twelve"
 		},{
-			name: "Green LED",
-			xPos: 1300
+			index: 13,
+			name: "Thirteen"
 		},{
-			name: "Red LED",
-			xPos: 1400
+			index: 14,
+			name: "Fourteen"
 		},{
-			name: "Tricolor LED",
-			xPos: 1500
+			index: 15,
+			name: "Fifteen"
 		},{
-			name: "RAM",
-			xPos: 1600
+			index: 16,
+			name: "Sixteen"
 		},{
-			name: "Mini USB",
-			xPos: 1700
+			index: 17,
+			name: "Seventeen"
 		},{
-			name: "Mini Motor",
-			xPos: 1800
+			index: 18,
+			name: "Eighteen"
 		},{
-			name: "Buzzer Motor",
-			xPos: 1900
+			index: 19,
+			name: "Nineteen"
 		},{
-			name: "Oscillator",
-			xPos: 2000
+			index: 20,
+			name: "Twenty"
 		},{
-			name: "PCI Slots",
-			xPos: 2100
+			index: 21,
+			name: "Twenty-One"
 		},{
-			name: "Photoresistor",
-			xPos: 2200
+			index: 22,
+			name: "Twenty-Two"
 		},{
-			name: "Piezo Buzzer",
-			xPos: 2300
+			index: 23,
+			name: "Twenty-Three"
 		},{
-			name: "Potentiometer",
-			xPos: 2400
+			index: 24,
+			name: "Twenty-Four"
 		},{
-			name: "Power Supply Unit",
-			xPos: 2500
+			index: 25,
+			name: "Twenty-Five"
 		},{
-			name: "Power Switch",
-			xPos: 2600
+			index: 26,
+			name: "Twenty-Six"
 		},{
-			name: "Pressure Sensor",
-			xPos: 2700
+			index: 27,
+			name: "Twenty-Seven"
 		},{
-			name: "Printer Connector",
-			xPos: 2800
+			index: 28,
+			name: "Twenty-Eight"
 		},{
-			name: "Protoboard",
-			xPos: 2900
+			index: 29,
+			name: "Twenty-Nine"
 		},{
-			name: "PS/2 Ports",
-			xPos: 3000
+			index: 30,
+			name: "Thirty"
 		},{
-			name: "PSU Plug",
-			xPos: 3100
+			index: 31,
+			name: "Thirty-One"
 		},{
-			name: "Resistor",
-			xPos: 3200
+			index: 32,
+			name: "Thirty-Two"
 		},{
-			name: "Ribbon Cable",
-			xPos: 3300
+			index: 33,
+			name: "Thirty-Three"
 		},{
-			name: "Servomotor",
-			xPos: 3400
+			index: 34,
+			name: "Thirty-Four"
 		},{
-			name: "Speaker",
-			xPos: 3500
+			index: 35,
+			name: "Thirty-Five"
 		},{
-			name: "DPDT Switch",
-			xPos: 3600
+			index: 36,
+			name: "Thirty-Six"
 		},{
-			name: "SPST Switch",
-			xPos: 3700
+			index: 37,
+			name: "Thirty-Seven"
 		},{
-			name: "Thermistor",
-			xPos: 3800
+			index: 38,
+			name: "Thirty-Eight"
 		},{
-			name: "Tilt Sensor",
-			xPos: 3900
+			index: 39,
+			name: "Thirty-Nine"
 		},{
-			name: "Transformer",
-			xPos: 4000
+			index: 40,
+			name: "Forty"
 		},{
-			name: "NPN Transistor",
-			xPos: 4100
+			index: 41,
+			name: "Forty-One"
 		},{
-			name: "Type A USB",
-			xPos: 4200
+			index: 42,
+			name: "Forty-Two"
 		},{
-			name: "Type B USB",
-			xPos: 4300
+			index: 43,
+			name: "Forty-Three"
 		},{
-			name: "VGA Connector",
-			xPos: 4400
-		}]
+			index: 44,
+			name: "Forty-Four"
+		},{
+			index: 45,
+			name: "Forty-Five"
+		},{
+			index: 46,
+			name: "Forty-Six"
+		},{
+			index: 47,
+			name: "Forty-Seven"
+		},{
+			index: 48,
+			name: "Forty-Eight"
+		},{
+			index: 49,
+			name: "Forty-Nine"
+		},{
+			index: 50,
+			name: "Fifty"
+		},]
 	};
 	return {
 		initializeCardGrid: CardObject.initializeCardGrid,
