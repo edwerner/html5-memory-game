@@ -6,8 +6,7 @@ var Card = function() {
 	var xPos = undefined;
 	var yPos = undefined;
 	var hidden = true;
-	var selected = false
-};
+}
 
 var CardGrid = function() {
 
@@ -22,6 +21,7 @@ var CardGrid = function() {
 		messageString: "JS-Memory-Game",
 		score: 0,
 		solved: undefined,
+		cardsActive: undefined,
 		getRandomNumber: function() {
     		return Math.floor(Math.random() * (this.cardsLength - 1 + 1)) + 1;
 		},
@@ -36,6 +36,7 @@ var CardGrid = function() {
 				CardObject.imageClicked(event);
 			}, false);
 			solved = false;
+			cardsActive = false;
 		},
 		createCardObjects: function() {
 			CardObject.html5Image = new Image();
@@ -86,6 +87,7 @@ var CardGrid = function() {
 					if (clickedCardsArray.length == 0) {
 						cardsArray[i].hidden = false;
 						clickedCardsArray.push(cardsArray[i]);
+						cardsActive = true;
 					} else if (clickedCardsArray.length ==  1
 						&& clickedCardsArray[0].id
 						!= cardsArray[i].id) {
@@ -103,17 +105,19 @@ var CardGrid = function() {
 						solved = true;
 					}
 				} else {
+					if (cardsActive == true) {
+						window.setTimeout(function(){
+							for (var i = 0; i < cardsArray.length; i++) {
+								cardsArray[i].hidden = true;
+							}
 
-					window.setTimeout(function(){
-						for (var i = 0; i < cardsArray.length; i++) {
-							cardsArray[i].hidden = true;
-						}
-
-						clickedCardsArray.length = 0;
-						CardObject.context.clearRect(0, 0, CardObject.canvas.width, CardObject.canvas.height);
-						CardObject.drawCardGrid(cardsArray);
-					}, 1000);
-					CardObject.messageString = "Didn't find a match";
+							clickedCardsArray.length = 0;
+							CardObject.context.clearRect(0, 0, CardObject.canvas.width, CardObject.canvas.height);
+							CardObject.drawCardGrid(cardsArray);
+						}, 1000);
+						CardObject.messageString = "Didn't find a match";
+						cardsActive = false;
+					}
 				}
 			}
 			CardObject.updateMessageText("message-text", CardObject.messageString);
