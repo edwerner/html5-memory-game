@@ -3,7 +3,6 @@ var Card = function() {
 	var name = undefined;
 	var id = undefined;
 	var image = undefined;
-	//var spriteXPos = undefined;
 	var xPos = undefined;
 	var yPos = undefined;
 	var hidden = true;
@@ -68,7 +67,6 @@ var CardGrid = function() {
 					card.index = cardsData[randomNumber].index;
 					card.name = cardsData[randomNumber].name;
 					card.id = "card_id_" + i;
-					//card.spriteXPos = cardsData[randomNumber].xPos;
 					card.xPos = this.xPos;
 					card.yPos = this.yPos;
 					card.hidden = true;
@@ -130,10 +128,8 @@ var CardGrid = function() {
 			var textPosY;
 			for (var i = 0; i < cardsArray.length; i++) {
 				var randomCard = cardsArray[i];
-				//CardObject.context.drawImage(CardObject.html5Image, randomCard.spriteXPos, 0, 
-				//	100, 100, randomCard.xPos, randomCard.yPos, 100, 100);
 					textPosX = randomCard.xPos + 50;
-					textPosY = randomCard.yPos + 60;
+					textPosY = randomCard.yPos + 58;
 					CardObject.context.font = "50px Arial";
 					CardObject.context.fillStyle = "#000000";
 					CardObject.context.fillText(randomCard.index, textPosX, textPosY);
